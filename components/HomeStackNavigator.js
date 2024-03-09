@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import FileScreen from "./FileScreen";
 import { Image, View, Text, Pressable } from "react-native";
 import { images } from "../constants";
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { AppContext } from "./context";
+import SettingsPage from "./SettingsScreen";
 
 const Stack = createStackNavigator();
 
@@ -31,10 +33,19 @@ function TitleLogo() {
 
 function SettingsButton() {
   const navigation = useNavigation();
+  const [toggleSettingsModal, setToggleSettingsModal] = useState(false);
+
+  const { showSettingsModal, setShowSettingsModal } = useContext(AppContext);
+
   return (
     <Pressable
       style={{ marginRight: 15 }}
-      onPress={() => navigation.navigate("Home", { showModal: true })}
+      onPress={() => {
+        console.log("Settings Clicked");
+        setShowSettingsModal(!showSettingsModal);
+        // setToggleSettingsModal(!toggleSettingsModal);
+        // navigation.navigate("Home", { showModal: toggleSettingsModal });
+      }}
     >
       <Feather name="settings" size={26} color="white" />
     </Pressable>
@@ -52,12 +63,15 @@ export default function HomeStack() {
           headerRight: (props) => <SettingsButton {...props} />,
           headerStyle: {
             backgroundColor: "green",
+            // height: 200,
           },
 
           headerTintColor: "white",
           headerTitleAlign: "left",
         }}
       />
+
+      <Stack.Screen name="Settings" component={SettingsPage} />
     </Stack.Navigator>
   );
 }

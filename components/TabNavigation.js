@@ -11,6 +11,9 @@ export default function BottomTabs({ FileScreen, DeleteScreen }) {
     <Tab.Navigator
       screenOptions={{
         tabBarShowLabel: false,
+        tabBarStyle: {
+          // height: 150,
+        },
       }}
     >
       <Tab.Screen
