@@ -71,7 +71,21 @@ export default function HomeStack() {
         }}
       />
 
-      <Stack.Screen name="Settings" component={SettingsPage} />
+      <Stack.Screen
+        name="Settings"
+        component={SettingsPage}
+        options={{
+          headerStyle: {
+            backgroundColor: "green",
+          },
+          headerTitleStyle: {
+            fontWeight: "bold",
+            color: "white",
+            fontSize: 22,
+          },
+          headerTintColor: "white",
+        }}
+      />
     </Stack.Navigator>
   );
 }

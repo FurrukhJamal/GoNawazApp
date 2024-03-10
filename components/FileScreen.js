@@ -13,6 +13,9 @@ import { AppContext } from "./context";
 
 import ModalSettingsContentView from "./ModalSettingsContentView";
 import SettingsDrawerTab from "./SettingsDrawerTab";
+import { ScrollView } from "react-native-gesture-handler";
+import { FlatList } from "react-native";
+import { data } from "../constants";
 
 export default function FileScreen({ route, navigation }) {
   const { showModal } = route.params || {};
@@ -41,8 +44,25 @@ export default function FileScreen({ route, navigation }) {
 
   return (
     <View style={styles.container}>
+      <View>
+        <FlatList
+          data={data}
+          renderItem={DisplayPolitician}
+          keyExtractor={(item, index) => index}
+          horizontal={false}
+        />
+      </View>
       <Text>FileScreen</Text>
       {isModalVisible && <SettingsDrawerTab />}
+    </View>
+  );
+}
+
+function DisplayPolitician({ item }) {
+  console.log("display politican hitting");
+  return (
+    <View style={{ backgroundColor: "yellow" }}>
+      <Text>{item.name}</Text>
     </View>
   );
 }
@@ -50,8 +70,8 @@ export default function FileScreen({ route, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignContent: "center",
-    justifyContent: "center",
-    backgroundColor: "yellow",
+    alignItems: "center",
+    // justifyContent: "center",
+    // backgroundColor: "yellow",
   },
 });
