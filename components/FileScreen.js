@@ -18,6 +18,7 @@ import SettingsDrawerTab from "./SettingsDrawerTab";
 import { ScrollView } from "react-native-gesture-handler";
 import { FlatList } from "react-native";
 import { data } from "../constants";
+import DisplayPolitician from "./DisplayPolitician";
 
 export default function FileScreen({ route, navigation }) {
   const { showModal } = route.params || {};
@@ -48,7 +49,7 @@ export default function FileScreen({ route, navigation }) {
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <View style={{ height: Height }}>
-          <View style={{ height: 150, paddingTop: 6 }}>
+          <View style={styles.politicianListContainer}>
             <FlatList
               data={data}
               renderItem={DisplayPolitician}
@@ -59,24 +60,13 @@ export default function FileScreen({ route, navigation }) {
           </View>
           {/* separator */}
           <View style={{ alignItems: "center", width: "100%" }}>
-            <View
-              style={{
-                width: "90%",
-                borderTopColor: "rgba(192, 192, 192, 0.5)",
-                borderTopWidth: 4,
-              }}
-            />
+            <View style={styles.lineSeperator} />
           </View>
 
-          <View
-            style={{
-              flex: 1,
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
+          <View style={styles.fileSectionContainer}>
             <Text>FileScreen</Text>
           </View>
+          {/* settings drawer model */}
           {isModalVisible && (
             <View style={{ position: "absolute", top: 0 }}>
               <SettingsDrawerTab />
@@ -88,43 +78,25 @@ export default function FileScreen({ route, navigation }) {
   );
 }
 
-function DisplayPolitician({ item }) {
-  console.log("display politican hitting");
-  return (
-    <View
-      style={{
-        alignItems: "center",
-        marginLeft: 15,
-        padding: 0,
-        marginTop: 10,
-        marginBottom: 10,
-      }}
-    >
-      <View style={{ alignItems: "center", justifyContent: "center" }}>
-        <Image
-          source={item.image}
-          style={{
-            height: 80,
-            width: 80,
-            borderRadius: 42,
-            borderWidth: 3,
-            borderColor: "green",
-          }}
-          resizeMethod="auto"
-        />
-      </View>
-      <View style={{ marginTop: 2 }}>
-        <Text>{item.name}</Text>
-      </View>
-    </View>
-  );
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
     // justifyContent: "center",
     // backgroundColor: "pink",
+  },
+  politicianListContainer: {
+    height: 150,
+    paddingTop: 6,
+  },
+  lineSeperator: {
+    width: "90%",
+    borderTopColor: "rgba(192, 192, 192, 0.5)",
+    borderTopWidth: 4,
+  },
+  fileSectionContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
