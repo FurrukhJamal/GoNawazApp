@@ -14,7 +14,7 @@ const data = [
   },
   {
     name: "Marium Nawaz",
-    image: images.mariumImageImage,
+    image: images.mariumImage,
   },
   {
     name: "Ishaq Dar",
