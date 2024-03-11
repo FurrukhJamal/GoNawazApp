@@ -49,7 +49,7 @@ export default function FileScreen({ route, navigation }) {
           data={data}
           renderItem={DisplayPolitician}
           keyExtractor={(item, index) => index}
-          horizontal={false}
+          horizontal={true}
         />
       </View>
       <Text>FileScreen</Text>
