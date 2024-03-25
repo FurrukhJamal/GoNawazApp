@@ -27,7 +27,8 @@ export default function FileScreen({ route, navigation }) {
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const { showSettingsModal, setShowSettingsModal } = useContext(AppContext);
+  const { showSettingsModal, setShowSettingsModal, isAppScanning } =
+    useContext(AppContext);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -50,13 +51,39 @@ export default function FileScreen({ route, navigation }) {
       <ScrollView>
         <View style={{ height: Height }}>
           <View style={styles.politicianListContainer}>
-            <FlatList
-              data={data}
-              renderItem={DisplayPolitician}
-              keyExtractor={(item, index) => index}
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-            />
+            {!isAppScanning ? (
+              <FlatList
+                data={data}
+                renderItem={DisplayPolitician}
+                keyExtractor={(item, index) => index}
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+              />
+            ) : (
+              // Scanning message Area
+              <View
+                style={{
+                  height: "100%",
+                  width: "100%",
+                  justifyContent: "center",
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 32,
+                    color: "lightgray",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Scanning
+                </Text>
+                <Text
+                  style={{ marginLeft: 20, fontSize: 18, fontWeight: "800" }}
+                >
+                  /Downloads
+                </Text>
+              </View>
+            )}
           </View>
           {/* separator */}
           <View style={{ alignItems: "center", width: "100%" }}>

@@ -10,6 +10,7 @@ import { useState } from "react";
 
 export default function App() {
   const [showSettingsModal, setShowSettingsModal] = useState(false);
+  const [isAppScanning, setAppScanning] = useState(false);
   const Width = Dimensions.get("window").width;
   const Height = Dimensions.get("window").height;
 
@@ -20,6 +21,8 @@ export default function App() {
         setShowSettingsModal,
         Width,
         Height,
+        isAppScanning,
+        setAppScanning,
       }}
     >
       <NavigationContainer>
